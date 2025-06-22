@@ -5,10 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoanController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [BookController::class, 'index']);
 // Redirect ke /buku setelah login
 Route::get('/dashboard', fn() => redirect('/buku'))->middleware(['auth', 'verified'])->name('dashboard');
 
