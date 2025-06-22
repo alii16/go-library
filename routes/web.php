@@ -22,7 +22,8 @@ Route::middleware('auth')->group(function () {
 // Pustakawan: Kelola buku dan lihat pinjaman
 Route::middleware(['auth', 'isPustakawan'])->group(function () {
     Route::resource('admin/books', BookController::class);
-    Route::get('/admin/loans', [LoanController::class, 'index']);
+    Route::get('/admin/loans', [LoanController::class, 'index'])->name('loans.index');
+    Route::delete('/admin/loans/{id}', [LoanController::class, 'destroy'])->name('loans.destroy');
 });
 
 // Daftar buku terbuka untuk umum
