@@ -13,7 +13,7 @@ class LoanController extends Controller
     // Daftar peminjaman di admin panel
     public function index()
     {
-        $loans = Loan::with('user', 'book')->get();
+        $loans = Loan::with('user', 'book')->get(); 
         return view('admin.loans.index', compact('loans'));
     }
 
@@ -50,4 +50,13 @@ class LoanController extends Controller
 
         return back()->with('success', 'Buku berhasil dipinjam')->with('notif_duration', 2000);
     }
+
+    public function destroy($id)
+    {
+        $loan = Loan::findOrFail($id);
+        $loan->delete(); 
+
+        return redirect()->route('loans.index')->with('success', 'Data peminjaman berhasil dihapus.');
+    }
+
 }
